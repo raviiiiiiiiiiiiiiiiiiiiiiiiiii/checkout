@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPI Payment</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ffffff;
+    color: #111;
+    margin: 0;
+    padding: 40px 10px;
+  }
+  h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  #amountDisplay {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  #qr img {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fafafa;
+  }
+  .footer {
+    font-size: 13px;
+    color: #888;
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+  <h2>Scan the QR to complete your payment</h2>
+  <p id="amountDisplay"></p>
+  <div id="qr"></div>
+  <div class="footer">UPI Payment Secure Page</div>
+
+<script>
+  // Get URL parameters
+  const params = new URLSearchParams(window.location.search);
+  const amount = parseFloat(params.get("amount")) || 0;
+  let order = params.get("order") || "";
+  const upiId = params.get("upiid") || "default@upi";
+
+  // Fix order if it contains a hashtag
+  if (order.includes("#")) {
+    order = order.replace("#", "");
+  }
+
+  // Use only the last two digits of the order
+  const lastTwo = order.slice(-2);
+
+  // Add those last two digits to amount (as paisa)
+  const finalAmount = amount + parseInt(lastTwo || "0") / 100;
+
+  // Create UPI payment link
+  const upiLink = `upi://pay?pa=${upiId}&am=${finalAmount}&cu=INR&tn=Order%20${order}`;
+
+  // Generate QR
+  const qr = document.getElementById("qr");
+  const img = document.createElement("img");
+  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
+  qr.appendChild(img);
+
+  // Show amount text
+  document.getElementById("amountDisplay").textContent = `Amount: ₹${finalAmount.toFixed(2)}`;
+</script>
+</body>
+</html>
