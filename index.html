@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>UPI Payment</title>
 <style>
@@ -22,37 +22,37 @@
 document.addEventListener("DOMContentLoaded", function() {
   const params = new URLSearchParams(window.location.search);
 
-  // 1. Amount
+  // 1️⃣ Get amount
   const rawAmount = params.get("amount") || "0";
   const amount = parseFloat(rawAmount.replace(/[^0-9.]/g, "")) || 0;
 
-  // 2. UPI ID
+  // 2️⃣ Get UPI ID
   const upiId = params.get("upiid") || "default@upi";
 
-  // 3. Order number: try query param first, then hash
-  let rawOrder = params.get("order") || window.location.hash.replace("#", "") || "0";
+  // 3️⃣ Get order number: first try query param, then hash
+  let order = params.get("order") || window.location.hash.replace("#", "") || "0";
 
   // keep only digits
-  const digitsOnly = rawOrder.replace(/\D/g, "");
-  
-  // last two digits
-  const lastTwo = digitsOnly.length >= 2 ? digitsOnly.slice(-2) : digitsOnly || "0";
+  const digitsOnly = order.replace(/\D/g, "");
 
-  // 4. Final amount (add lastTwo as paisa)
+  // 4️⃣ Get last two digits for paisa
+  const lastTwo = digitsOnly.slice(-2) || "0";
+
+  // 5️⃣ Add last two digits as paisa
   const finalAmount = amount + Number(lastTwo)/100;
   const finalAmountFixed = finalAmount.toFixed(2);
 
-  // 5. Build UPI link
+  // 6️⃣ Build UPI link
   const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&am=${encodeURIComponent(finalAmountFixed)}&cu=INR&tn=Order%20${encodeURIComponent(digitsOnly)}`;
 
-  // 6. Generate QR
+  // 7️⃣ Generate QR
   const qr = document.getElementById("qr");
   const img = document.createElement("img");
   img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
   img.alt = "UPI QR Code";
   qr.appendChild(img);
 
-  // 7. Show amount
+  // 8️⃣ Show final amount
   document.getElementById("amountDisplay").textContent = `Amount: ₹${finalAmountFixed}`;
 });
 </script>
