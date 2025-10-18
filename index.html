@@ -30,7 +30,7 @@
   .header {
     background: #114b33;
     color: #fff;
-    padding: 30px 20px;
+    padding: 35px 20px 40px;
   }
 
   .biz-name {
@@ -42,19 +42,26 @@
   .trusted {
     font-size: 13px;
     opacity: 0.9;
+    margin-bottom: 10px;
+  }
+
+  .price-summary {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-top: 15px;
   }
 
   .amount {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 600;
-    margin: 25px 0 10px;
+    margin-top: 4px;
   }
 
   .scan-text {
     font-size: 15px;
     font-weight: 600;
     color: #333;
-    margin-bottom: 15px;
+    margin: 25px 0 15px;
   }
 
   #qr img {
@@ -68,80 +75,79 @@
   .upi-icons {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 18px;
     margin-top: 15px;
     margin-bottom: 10px;
   }
 
   .upi-icons img {
     height: 26px;
-    opacity: 0.85;
+    opacity: 0.9;
   }
 
   .footer {
     font-size: 12px;
     color: #777;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
   }
 </style>
 </head>
 <body>
   <div class="card">
     <div class="header">
-      <div class="biz-name" id="bizName">UPI Payment</div>
-      <div class="trusted">Secure Payment Gateway</div>
+      <div class="biz-name" id="bizName">Business Name</div>
+      <div class="trusted">Rapid Pay Trusted Business</div>
+      <div class="price-summary">
+        Price Summary
+        <div class="amount" id="amountDisplay">₹0</div>
+      </div>
     </div>
 
-    <div class="amount" id="amountDisplay">₹0</div>
     <div class="scan-text">Scan to Pay</div>
     <div id="qr"></div>
+
+    <div class="footer">Scan using any UPI app</div>
 
     <div class="upi-icons">
       <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/PhonePe_Logo.png" alt="PhonePe">
       <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Pay_Logo.svg" alt="GPay">
       <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/BHIM_logo.svg" alt="BHIM">
     </div>
-
-    <div class="footer">Powered by UPI</div>
   </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const params = new URLSearchParams(window.location.search);
   
-  // ✅ Business / header name (optional)
-  const biz = params.get("biz") || "UPI Payment";
+  // ✅ Business name
+  const biz = params.get("biz") || "Business Name";
   document.getElementById("bizName").textContent = biz;
 
-  // ✅ 1️⃣ Get amount
+  // ✅ Amount
   const rawAmount = params.get("amount") || "0";
   const amount = parseFloat(rawAmount.replace(/[^0-9.]/g, "")) || 0;
 
-  // ✅ 2️⃣ Get UPI ID
+  // ✅ UPI ID
   const upiId = params.get("upiid") || "default@upi";
 
-  // ✅ 3️⃣ Get order number (query param or hash)
+  // ✅ Order number (query or hash)
   let order = params.get("order") || window.location.hash.replace("#", "") || "0";
   const digitsOnly = order.replace(/\D/g, "");
-
-  // ✅ 4️⃣ Last 2 digits for paisa
   const lastTwo = digitsOnly.slice(-2) || "0";
-
-  // ✅ 5️⃣ Add last two digits as paisa
   const finalAmount = amount + Number(lastTwo)/100;
   const finalAmountFixed = finalAmount.toFixed(2);
 
-  // ✅ 6️⃣ Build UPI link
+  // ✅ Build UPI link
   const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&am=${encodeURIComponent(finalAmountFixed)}&cu=INR&tn=Order%20${encodeURIComponent(digitsOnly)}`;
 
-  // ✅ 7️⃣ Generate QR
+  // ✅ Generate QR
   const qr = document.getElementById("qr");
   const img = document.createElement("img");
   img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
   img.alt = "UPI QR Code";
   qr.appendChild(img);
 
-  // ✅ 8️⃣ Show final amount
+  // ✅ Display amount
   document.getElementById("amountDisplay").textContent = `₹${finalAmountFixed}`;
 });
 </script>
