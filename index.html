@@ -10,9 +10,6 @@
     background: #ffffff;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
   }
 
   .header {
@@ -75,12 +72,11 @@
     border: 1px solid #ddd;
   }
 
-  footer {
-    margin-top: auto;
+  .footer {
     text-align: center;
-    padding: 20px 0;
     font-size: 13px;
     color: #666;
+    margin: 40px 0 20px;
   }
 </style>
 </head>
@@ -98,7 +94,8 @@
     <div class="scan-text">Scan using any UPI app</div>
   </div>
 
-  <footer>Powered by Rapid Pay</footer>
+  <!-- Proper footer at bottom -->
+  <div class="footer">Powered by Rapid Pay</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
