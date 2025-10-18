@@ -1,155 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>UPI Payment - Rapid Pay</title>
-<style>
-  body {
-    font-family: "Inter", Arial, sans-serif;
-    background: #ffffff;
-    margin: 0;
-    padding: 0;
-    overflow-y: auto;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UPI Payment - Rapid Pay</title>
+  <style>
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      overflow-y: auto;
+    }
 
-  .header {
-    background: #114b33;
-    color: #fff;
-    text-align: center;
-    padding: 70px 20px 120px;
-  }
+    .header {
+      background: #114b33;
+      color: #fff;
+      text-align: center;
+      padding: 70px 20px 120px;
+    }
 
-  .biz-name {
-    font-size: 36px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-  }
+    .biz-name {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
 
-  .trusted {
-    font-size: 12px;
-    opacity: 0.85;
-    margin-top: 2px;
-  }
+    .trusted {
+      font-size: 12px;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
 
-  .price-summary {
-    margin-top: 35px;
-    font-size: 16px;
-    font-weight: 500;
-    opacity: 0.9;
-  }
+    .price-summary {
+      margin-top: 35px;
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
 
-  .amount {
-    font-size: 36px;
-    font-weight: 700;
-    margin-top: 6px;
-  }
+    .amount {
+      font-size: 36px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
 
-  .content {
-    background: #ffffff;
-    text-align: center;
-    border-radius: 24px 24px 0 0;
-    padding: 40px 20px 20px;
-    max-width: 400px;
-    margin: -80px auto 0 auto;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
-  }
+    .content {
+      background: #ffffff;
+      text-align: center;
+      border-radius: 24px 24px 0 0;
+      padding: 40px 20px 20px;
+      max-width: 400px;
+      margin: -80px auto 0 auto;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+    }
 
-  .scan-text {
-    font-size: 18px;
-    font-weight: 600;
-    color: #111;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+    .scan-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
 
-  #qr img {
-    border-radius: 12px;
-    background: #fff;
-    padding: 10px;
-    width: 220px;
-    height: 220px;
-    border: 1px solid #ddd;
-  }
+    #qr img {
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
+      width: 220px;
+      height: 220px;
+      border: 1px solid #ddd;
+    }
 
-  /* New section styles */
-  .steps-box {
-    background: #f8f9f9;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 30px auto;
-    max-width: 340px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-    text-align: left;
-  }
+    /* ✅ New section styles */
+    .steps-box {
+      background: linear-gradient(135deg, #f8f9f9, #eef5f1);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 340px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+      text-align: left;
+    }
 
-  .steps-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #111;
-    text-align: center;
-    margin-bottom: 15px;
-  }
+    .steps-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111;
+      text-align: center;
+      margin-bottom: 15px;
+    }
 
-  .step {
-    font-size: 15px;
-    font-weight: 500;
-    margin: 8px 0;
-  }
+    .step {
+      font-size: 15px;
+      font-weight: 500;
+      margin: 8px 0;
+    }
 
-  .apps-section {
-    margin-top: 30px;
-    text-align: center;
-  }
+    .apps-section {
+      margin-top: 30px;
+      text-align: center;
+    }
 
-  .app-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f3f3f3;
-    border-radius: 14px;
-    padding: 12px 16px;
-    max-width: 340px;
-    margin: 10px auto;
-  }
+    .apps-header {
+      font-size: 17px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 15px;
+    }
 
-  .app-name {
-    font-weight: 600;
-    font-size: 15px;
-    color: #111;
-  }
+    .app-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f3f3f3;
+      border-radius: 14px;
+      padding: 12px 16px;
+      max-width: 340px;
+      margin: 10px auto;
+    }
 
-  .open-btn {
-    background: #114b33;
-    color: #fff;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-  }
+    .app-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+    }
 
-  .open-btn:hover {
-    background: #0d3d29;
-  }
+    .open-btn {
+      background: #114b33;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
 
-  .divider {
-    border-top: 1px solid #ccc;
-    width: 80%;
-    margin: 40px auto 20px;
-  }
+    .open-btn:hover {
+      background: #0d3d29;
+    }
 
-  .footer {
-    text-align: center;
-    font-size: 13px;
-    color: #666;
-    margin: 10px 0 30px;
-  }
-</style>
+    .divider {
+      border-top: 1px solid #ccc;
+      width: 80%;
+      margin: 40px auto 20px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin: 10px 0 30px;
+    }
+  </style>
 </head>
 <body>
-
   <div class="header">
     <div class="biz-name" id="bizName">Rapid Pay</div>
     <div class="trusted">Rapid Pay Trusted Business</div>
@@ -170,18 +176,23 @@
     </div>
 
     <div class="apps-section">
+      <div class="apps-header">Choose your UPI app</div>
+
       <div class="app-card">
         <span class="app-name">Google Pay</span>
         <button class="open-btn" onclick="openUPIApp('gpay')">Open</button>
       </div>
+
       <div class="app-card">
         <span class="app-name">PhonePe</span>
         <button class="open-btn" onclick="openUPIApp('phonepe')">Open</button>
       </div>
+
       <div class="app-card">
         <span class="app-name">BHIM UPI</span>
         <button class="open-btn" onclick="openUPIApp('bhim')">Open</button>
       </div>
+
       <div class="app-card">
         <span class="app-name">Paytm</span>
         <button class="open-btn" onclick="openUPIApp('paytm')">Open</button>
@@ -191,49 +202,60 @@
     <div class="divider"></div>
     <div class="footer">Powered by Rapid Pay</div>
     <!-- ✅ New Section Ends -->
-
   </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const params = new URLSearchParams(window.location.search);
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const params = new URLSearchParams(window.location.search);
 
-  const biz = params.get("biz") || "Rapid Pay";
-  document.getElementById("bizName").textContent = biz;
+      const biz = params.get("biz") || "Rapid Pay";
+      document.getElementById("bizName").textContent = biz;
 
-  const rawAmount = params.get("amount") || "8700";
-  const amount = parseFloat(rawAmount.replace(/[^0-9.]/g, "")) || 0;
+      const rawAmount = params.get("amount") || "8700";
+      const amount = parseFloat(rawAmount.replace(/[^0-9.]/g, "")) || 0;
 
-  const upiId = params.get("upiid") || "default@upi";
+      const upiId = params.get("upiid") || "default@upi";
 
-  let order = params.get("order") || window.location.hash.replace("#", "") || "0";
-  const digitsOnly = order.replace(/\D/g, "");
-  const lastTwo = digitsOnly.slice(-2) || "0";
-  const finalAmount = amount + Number(lastTwo)/100;
-  const finalAmountFixed = finalAmount.toFixed(2);
+      let order = params.get("order") || window.location.hash.replace("#", "") || "0";
+      const digitsOnly = order.replace(/\D/g, "");
+      const lastTwo = digitsOnly.slice(-2) || "0";
+      const finalAmount = amount + Number(lastTwo)/100;
+      const finalAmountFixed = finalAmount.toFixed(2);
 
-  const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&am=${encodeURIComponent(finalAmountFixed)}&cu=INR&tn=Order%20${encodeURIComponent(digitsOnly)}`;
+      const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&am=${encodeURIComponent(finalAmountFixed)}&cu=INR&tn=Order%20${encodeURIComponent(digitsOnly)}`;
 
-  const qr = document.getElementById("qr");
-  const img = document.createElement("img");
-  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
-  img.alt = "UPI QR Code";
-  qr.appendChild(img);
+      const qr = document.getElementById("qr");
+      const img = document.createElement("img");
+      img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
+      img.alt = "UPI QR Code";
+      qr.appendChild(img);
 
-  document.getElementById("amountDisplay").textContent = `₹${finalAmountFixed}`;
-});
+      document.getElementById("amountDisplay").textContent = `₹${finalAmountFixed}`;
+    });
 
-// ✅ Function to open UPI apps
-function openUPIApp(app) {
-  const links = {
-    gpay: "https://gpay.app.goo.gl/",
-    phonepe: "https://phon.pe/",
-    bhim: "https://play.google.com/store/apps/details?id=in.org.npci.upiapp",
-    paytm: "https://paytm.com/",
-  };
-  window.location.href = links[app];
-}
-</script>
+    // ✅ Improved Function to open UPI apps
+    function openUPIApp(app) {
+      const links = {
+        gpay: "tez://upi",
+        phonepe: "phonepe://upi",
+        bhim: "upi://pay",
+        paytm: "paytmmp://upi"
+      };
 
+      // Try deep link first
+      window.location.href = links[app];
+
+      // Fallback to store page after delay (if app not installed)
+      setTimeout(() => {
+        const fallback = {
+          gpay: "https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user",
+          phonepe: "https://play.google.com/store/apps/details?id=com.phonepe.app",
+          bhim: "https://play.google.com/store/apps/details?id=in.org.npci.upiapp",
+          paytm: "https://play.google.com/store/apps/details?id=net.one97.paytm"
+        };
+        window.location.href = fallback[app];
+      }, 1000);
+    }
+  </script>
 </body>
 </html>
