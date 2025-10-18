@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Rapid Pay</title>
+<title>UPI Payment</title>
 <style>
   body {
     font-family: "Inter", Arial, sans-serif;
@@ -88,8 +88,8 @@
 <body>
   <div class="card">
     <div class="header">
-      <div class="biz-name" id="bizName">Business Name</div>
-      <div class="trusted">RapidPay Trusted Business</div>
+      <div class="biz-name" id="bizName">UPI Payment</div>
+      <div class="trusted">Secure Payment Gateway</div>
     </div>
 
     <div class="amount" id="amountDisplay">₹0</div>
@@ -102,42 +102,46 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/BHIM_logo.svg" alt="BHIM">
     </div>
 
-    <div class="footer">Powered by RapidPay</div>
+    <div class="footer">Powered by UPI</div>
   </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const params = new URLSearchParams(window.location.search);
-
-  // Business name
-  const biz = params.get("biz") || "Business Name";
+  
+  // ✅ Business / header name (optional)
+  const biz = params.get("biz") || "UPI Payment";
   document.getElementById("bizName").textContent = biz;
 
-  // Amount
+  // ✅ 1️⃣ Get amount
   const rawAmount = params.get("amount") || "0";
   const amount = parseFloat(rawAmount.replace(/[^0-9.]/g, "")) || 0;
 
-  // UPI ID
+  // ✅ 2️⃣ Get UPI ID
   const upiId = params.get("upiid") || "default@upi";
 
-  // Order
-  let order = params.get("order") || "0";
+  // ✅ 3️⃣ Get order number (query param or hash)
+  let order = params.get("order") || window.location.hash.replace("#", "") || "0";
   const digitsOnly = order.replace(/\D/g, "");
+
+  // ✅ 4️⃣ Last 2 digits for paisa
   const lastTwo = digitsOnly.slice(-2) || "0";
+
+  // ✅ 5️⃣ Add last two digits as paisa
   const finalAmount = amount + Number(lastTwo)/100;
   const finalAmountFixed = finalAmount.toFixed(2);
 
-  // UPI Link
+  // ✅ 6️⃣ Build UPI link
   const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&am=${encodeURIComponent(finalAmountFixed)}&cu=INR&tn=Order%20${encodeURIComponent(digitsOnly)}`;
 
-  // Generate QR
+  // ✅ 7️⃣ Generate QR
   const qr = document.getElementById("qr");
   const img = document.createElement("img");
   img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
   img.alt = "UPI QR Code";
   qr.appendChild(img);
 
-  // Show Amount
+  // ✅ 8️⃣ Show final amount
   document.getElementById("amountDisplay").textContent = `₹${finalAmountFixed}`;
 });
 </script>
