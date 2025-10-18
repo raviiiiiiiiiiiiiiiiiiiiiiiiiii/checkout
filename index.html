@@ -65,17 +65,28 @@
     height: 200px;
   }
 
+  .upi-section {
+    margin-top: 20px;
+  }
+
+  .upi-subheading {
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
   .upi-icons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 15px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   .upi-icons img {
-    height: 26px;
-    opacity: 0.9;
+    height: 28px;
+    object-fit: contain;
   }
 
   .footer {
@@ -96,10 +107,13 @@
     <div class="scan-text">Scan to Pay</div>
     <div id="qr"></div>
 
-    <div class="upi-icons">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/phonepe.svg" alt="PhonePe" style="filter: brightness(0) saturate(100%) invert(23%) sepia(97%) saturate(2510%) hue-rotate(260deg) brightness(90%) contrast(105%);">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlepay.svg" alt="GPay" style="filter: brightness(0) saturate(100%) invert(25%) sepia(79%) saturate(1650%) hue-rotate(187deg) brightness(97%) contrast(94%);">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/bhim.svg" alt="BHIM" style="filter: none;">
+    <div class="upi-section">
+      <div class="upi-subheading">Scan using any UPI app</div>
+      <div class="upi-icons">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/PhonePe_Logo.png" alt="PhonePe">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Google_Pay_logo.svg" alt="Google Pay" style="height:26px;">
+        <img src="https://upload.wikimedia.org/wikipedia/en/3/39/BHIM_logo.png" alt="BHIM">
+      </div>
     </div>
 
     <div class="footer">Powered by RapidPay</div>
