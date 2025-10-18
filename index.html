@@ -7,7 +7,7 @@
 <style>
   body {
     font-family: "Inter", Arial, sans-serif;
-    background: #fff;
+    background: #fdfdfd;
     margin: 0;
     padding: 0;
     display: flex;
@@ -18,98 +18,121 @@
 
   .container {
     text-align: center;
-    max-width: 360px;
     width: 100%;
-    border: 1px solid #eaeaea;
-    border-radius: 20px;
+    max-width: 400px;
+    border: 1px solid #eee;
+    border-radius: 28px;
     overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.06);
   }
 
+  /* Green Header Section */
   .header {
     background: #114b33;
     color: #fff;
-    padding: 40px 20px;
-    border-bottom: 1px solid #e5e5e5;
+    padding: 50px 20px 60px;
+    position: relative;
   }
 
   .biz-name {
     font-size: 22px;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
   }
 
   .trusted {
-    font-size: 13px;
+    font-size: 14px;
     opacity: 0.9;
   }
 
   .price-summary {
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 15px;
     font-weight: 500;
+    opacity: 0.9;
   }
 
   .amount {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
-    margin-top: 5px;
+    margin-top: 8px;
+  }
+
+  /* QR + Bottom Section */
+  .content {
+    background: #fff;
+    margin-top: -40px;
+    border-radius: 20px 20px 0 0;
+    padding: 30px 20px 10px;
   }
 
   .scan-text {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
-    margin: 25px 0 15px;
-    color: #222;
+    color: #111;
+    margin-bottom: 18px;
   }
 
   #qr img {
-    border-radius: 10px;
-    background: #f3f3f3;
+    border-radius: 12px;
+    background: #fff;
     padding: 10px;
-    width: 200px;
-    height: 200px;
+    width: 210px;
+    height: 210px;
+    border: 1px solid #ddd;
   }
 
   .footer {
-    margin-top: 25px;
-    font-size: 13px;
-    color: #555;
+    font-size: 14px;
+    color: #444;
     font-weight: 500;
+    margin-top: 25px;
   }
 
   .upi-icons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 18px;
-    margin: 15px 0 25px;
+    gap: 22px;
+    margin: 18px 0 25px;
   }
 
   .upi-icons img {
-    height: 28px;
+    height: 30px;
     width: auto;
-    opacity: 0.95;
+    object-fit: contain;
+  }
+
+  .powered {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 25px;
   }
 </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <div class="biz-name" id="bizName">Business Name</div>
-      <div class="trusted">Rapid Pay Trusted Business</div>
+      <div class="biz-name" id="bizName">Typof Technologies</div>
+      <div class="trusted">SMEpay Trusted Business</div>
       <div class="price-summary">Price Summary</div>
-      <div class="amount" id="amountDisplay">₹0</div>
+      <div class="amount" id="amountDisplay">₹8700</div>
     </div>
 
-    <div class="scan-text">Scan to Pay</div>
-    <div id="qr"></div>
+    <div class="content">
+      <div class="scan-text">Scan to Pay</div>
+      <div id="qr"></div>
 
-    <div class="footer">Scan using any UPI app</div>
+      <div class="footer">Scan using any UPI app</div>
 
-    <div class="upi-icons">
-      <img src="https://cdn.worldvectorlogo.com/logos/phonepe-1.svg" alt="PhonePe">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Pay_Logo.svg" alt="GPay">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/BHIM_logo.svg" alt="BHIM">
+      <div class="upi-icons">
+        <img src="https://cdn.worldvectorlogo.com/logos/phonepe-1.svg" alt="PhonePe">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Google_Pay_Logo.svg" alt="GPay">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/BHIM_logo.svg" alt="BHIM">
+      </div>
+
+      <div class="powered">Powered by SMEpay</div>
     </div>
   </div>
 
@@ -118,11 +141,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const params = new URLSearchParams(window.location.search);
   
   // Business name
-  const biz = params.get("biz") || "Business Name";
+  const biz = params.get("biz") || "Typof Technologies";
   document.getElementById("bizName").textContent = biz;
 
   // Amount
-  const rawAmount = params.get("amount") || "0";
+  const rawAmount = params.get("amount") || "8700";
   const amount = parseFloat(rawAmount.replace(/[^0-9.]/g, "")) || 0;
 
   // UPI ID
