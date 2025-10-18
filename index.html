@@ -3,40 +3,25 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>UPI Payment</title>
+<title>UPI Payment - Rapid Pay</title>
 <style>
   body {
     font-family: "Inter", Arial, sans-serif;
-    background: #fdfdfd;
+    background: #ffffff;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
   }
 
-  .container {
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #eee;
-    border-radius: 28px;
-    overflow: hidden;
-    background: #fff;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.06);
-  }
-
-  /* Green Header Section */
+  /* Full-width green header */
   .header {
     background: #114b33;
     color: #fff;
-    padding: 50px 20px 60px;
-    position: relative;
+    text-align: center;
+    padding: 60px 20px 120px;
   }
 
   .biz-name {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 700;
     margin-bottom: 6px;
   }
@@ -48,129 +33,125 @@
 
   .price-summary {
     margin-top: 25px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     opacity: 0.9;
   }
 
   .amount {
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 700;
-    margin-top: 8px;
+    margin-top: 5px;
   }
 
-  /* QR + Bottom Section */
+  /* White QR section overlapping green */
   .content {
-    background: #fff;
-    margin-top: -40px;
-    border-radius: 20px 20px 0 0;
-    padding: 30px 20px 10px;
+    background: #ffffff;
+    text-align: center;
+    border-radius: 24px 24px 0 0;
+    padding: 40px 20px 20px;
+    max-width: 400px;
+    margin: -80px auto 0 auto;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
   }
 
   .scan-text {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 600;
     color: #111;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
   #qr img {
     border-radius: 12px;
     background: #fff;
     padding: 10px;
-    width: 210px;
-    height: 210px;
+    width: 220px;
+    height: 220px;
     border: 1px solid #ddd;
   }
 
   .footer {
-    font-size: 14px;
+    font-size: 15px;
     color: #444;
     font-weight: 500;
-    margin-top: 25px;
+    margin-top: 30px;
   }
 
   .upi-icons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 22px;
+    gap: 25px;
     margin: 18px 0 25px;
   }
 
   .upi-icons img {
-    height: 30px;
+    height: 32px;
     width: auto;
     object-fit: contain;
   }
 
   .powered {
-    font-size: 12px;
+    font-size: 13px;
     color: #666;
     margin-bottom: 25px;
   }
 </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="biz-name" id="bizName">Typof Technologies</div>
-      <div class="trusted">SMEpay Trusted Business</div>
-      <div class="price-summary">Price Summary</div>
-      <div class="amount" id="amountDisplay">₹8700</div>
+
+  <div class="header">
+    <div class="biz-name" id="bizName">Rapid Pay</div>
+    <div class="trusted">Rapid Pay Trusted Business</div>
+    <div class="price-summary">Price Summary</div>
+    <div class="amount" id="amountDisplay">₹8700</div>
+  </div>
+
+  <div class="content">
+    <div class="scan-text">Scan to Pay</div>
+    <div id="qr"></div>
+
+    <div class="footer">Scan using any UPI app</div>
+
+    <div class="upi-icons">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/PhonePe_Logo.svg" alt="PhonePe">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Google_Pay_Logo.svg" alt="Google Pay">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/BHIM_logo.svg" alt="BHIM">
     </div>
 
-    <div class="content">
-      <div class="scan-text">Scan to Pay</div>
-      <div id="qr"></div>
-
-      <div class="footer">Scan using any UPI app</div>
-
-      <div class="upi-icons">
-        <img src="https://cdn.worldvectorlogo.com/logos/phonepe-1.svg" alt="PhonePe">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Google_Pay_Logo.svg" alt="GPay">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/BHIM_logo.svg" alt="BHIM">
-      </div>
-
-      <div class="powered">Powered by SMEpay</div>
-    </div>
+    <div class="powered">Powered by Rapid Pay</div>
   </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const params = new URLSearchParams(window.location.search);
-  
-  // Business name
-  const biz = params.get("biz") || "Typof Technologies";
+
+  const biz = params.get("biz") || "Rapid Pay";
   document.getElementById("bizName").textContent = biz;
 
-  // Amount
   const rawAmount = params.get("amount") || "8700";
   const amount = parseFloat(rawAmount.replace(/[^0-9.]/g, "")) || 0;
 
-  // UPI ID
   const upiId = params.get("upiid") || "default@upi";
 
-  // Order number
   let order = params.get("order") || window.location.hash.replace("#", "") || "0";
   const digitsOnly = order.replace(/\D/g, "");
   const lastTwo = digitsOnly.slice(-2) || "0";
   const finalAmount = amount + Number(lastTwo)/100;
   const finalAmountFixed = finalAmount.toFixed(2);
 
-  // UPI link
   const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&am=${encodeURIComponent(finalAmountFixed)}&cu=INR&tn=Order%20${encodeURIComponent(digitsOnly)}`;
 
-  // Generate QR
   const qr = document.getElementById("qr");
   const img = document.createElement("img");
   img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
   img.alt = "UPI QR Code";
   qr.appendChild(img);
 
-  // Display amount
   document.getElementById("amountDisplay").textContent = `₹${finalAmountFixed}`;
 });
 </script>
+
 </body>
 </html>
