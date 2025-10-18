@@ -59,7 +59,8 @@
     font-size: 18px;
     font-weight: 600;
     color: #111;
-    margin-bottom: 22px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   #qr img {
@@ -71,32 +72,11 @@
     border: 1px solid #ddd;
   }
 
-  .upi-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    margin: 25px 0 10px;
-  }
-
-  .upi-icons img {
-    height: 36px;
-    width: auto;
-    object-fit: contain;
-  }
-
   .footer {
-    font-size: 15px;
-    color: #444;
-    font-weight: 500;
-    margin-top: 8px;
-  }
-
-  .powered {
+    text-align: center;
     font-size: 13px;
     color: #666;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: 40px 0 20px;
   }
 </style>
 </head>
@@ -111,16 +91,10 @@
 
   <div class="content">
     <div id="qr"></div>
-
-    <div class="upi-icons">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Google_Pay_Logo.svg" alt="Google Pay" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Pay_Logo_%282020%29.svg/512px-Google_Pay_Logo_%282020%29.svg.png'">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/PhonePe_Logo.svg" alt="PhonePe" onerror="this.src='https://logos-world.net/wp-content/uploads/2022/05/PhonePe-Logo.png'">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/BHIM_logo.svg" alt="BHIM" onerror="this.src='https://seeklogo.com/images/B/bhim-logo-3B8A8B3E1F-seeklogo.com.png'">
-    </div>
-
-    <div class="footer">Scan using any UPI app</div>
-    <div class="powered">Powered by Rapid Pay</div>
+    <div class="scan-text">Scan using any UPI app</div>
   </div>
+
+  <div class="footer">Powered by Rapid Pay</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
