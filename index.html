@@ -10,6 +10,7 @@
     background: #ffffff;
     margin: 0;
     padding: 0;
+    overflow-y: auto;
   }
 
   .header {
@@ -72,11 +73,78 @@
     border: 1px solid #ddd;
   }
 
+  /* New section styles */
+  .steps-box {
+    background: #f8f9f9;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 340px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    text-align: left;
+  }
+
+  .steps-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .step {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 8px 0;
+  }
+
+  .apps-section {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .app-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f3f3;
+    border-radius: 14px;
+    padding: 12px 16px;
+    max-width: 340px;
+    margin: 10px auto;
+  }
+
+  .app-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #111;
+  }
+
+  .open-btn {
+    background: #114b33;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .open-btn:hover {
+    background: #0d3d29;
+  }
+
+  .divider {
+    border-top: 1px solid #ccc;
+    width: 80%;
+    margin: 40px auto 20px;
+  }
+
   .footer {
     text-align: center;
     font-size: 13px;
     color: #666;
-    margin: 40px 0 20px;
+    margin: 10px 0 30px;
   }
 </style>
 </head>
@@ -92,10 +160,39 @@
   <div class="content">
     <div id="qr"></div>
     <div class="scan-text">Scan using any UPI app</div>
-  </div>
 
-  <!-- Proper footer at bottom -->
-  <div class="footer">Powered by Rapid Pay</div>
+    <!-- ✅ New Section Starts -->
+    <div class="steps-box">
+      <div class="steps-title">Complete the payment in 3 simple steps</div>
+      <div class="step">1️⃣ Take a screenshot</div>
+      <div class="step">2️⃣ Open your preferred UPI app</div>
+      <div class="step">3️⃣ Complete the payment</div>
+    </div>
+
+    <div class="apps-section">
+      <div class="app-card">
+        <span class="app-name">Google Pay</span>
+        <button class="open-btn" onclick="openUPIApp('gpay')">Open</button>
+      </div>
+      <div class="app-card">
+        <span class="app-name">PhonePe</span>
+        <button class="open-btn" onclick="openUPIApp('phonepe')">Open</button>
+      </div>
+      <div class="app-card">
+        <span class="app-name">BHIM UPI</span>
+        <button class="open-btn" onclick="openUPIApp('bhim')">Open</button>
+      </div>
+      <div class="app-card">
+        <span class="app-name">Paytm</span>
+        <button class="open-btn" onclick="openUPIApp('paytm')">Open</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="footer">Powered by Rapid Pay</div>
+    <!-- ✅ New Section Ends -->
+
+  </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -125,6 +222,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
   document.getElementById("amountDisplay").textContent = `₹${finalAmountFixed}`;
 });
+
+// ✅ Function to open UPI apps
+function openUPIApp(app) {
+  const links = {
+    gpay: "https://gpay.app.goo.gl/",
+    phonepe: "https://phon.pe/",
+    bhim: "https://play.google.com/store/apps/details?id=in.org.npci.upiapp",
+    paytm: "https://paytm.com/",
+  };
+  window.location.href = links[app];
+}
 </script>
 
 </body>
